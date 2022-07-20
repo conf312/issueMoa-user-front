@@ -36,3 +36,22 @@
     transform: rotate(360deg);
   }
 }
+
+.Issuemoa-header {
+  background-color: white;
+  /* height: 55px; */
+}
+
+.Issuemoa-header .logo {
+  height: 40px;
+  margin: 0px 0px 0px 30px;
+}
+
+.Issuemoa-header .btnLogin {
+  margin: 0px 40px 0px 0px;
+  font-size: 20px;
+}
+
+.Issuemoa-div {
+  background-color: #e9ecef;
+}
