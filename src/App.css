@@ -45,13 +45,14 @@
 .Issuemoa-header .logo {
   height: 40px;
   margin: 0px 0px 0px 30px;
+  cursor: pointer;
 }
 
 .Issuemoa-header .btnLogin {
-  margin: 0px 40px 0px 0px;
+  margin: 0px 20px 0px 0px;
   font-size: 20px;
 }
 
-.Issuemoa-div {
+.Issuemoa-main {
   background-color: #e9ecef;
 }
