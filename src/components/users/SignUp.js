@@ -1,4 +1,4 @@
-import { Form, Button, InputGroup, FloatingLabel, Row, Col }  from 'react-bootstrap';
+import { Form, Button, InputGroup, FloatingLabel, Row, Col } from 'react-bootstrap';
 import { person } from '../../images';
 import { useDaumPostcodePopup } from 'react-daum-postcode';
 import React, { useRef, useState } from 'react';
@@ -47,20 +47,28 @@ function SignUp() {
     event.stopPropagation();
     event.preventDefault();
     setValidated(true);
-    
+
     const form = event.currentTarget;
     const formData = new FormData(form);
-    formData.append("recaptchaValue", recaptchaRef.current.getValue());
+
     if (form.checkValidity()) {
-      AxiosUtil.send("POST", "/issuemoa/users/save", formData, "", (e) => {
-         if (e.data != "") {
-          window.location.replace("/users/save/complate");
-         } else {
-          alert("Please try again later.");
-         }
+      AxiosUtil.send("POST", "/issuemoa/users/count-by/email", formData, "", (e) => {
+        if (e.data > 0) {
+          alert("Email in use. Please use another email.");
+        } else {
+          formData.append("recaptchaValue", recaptchaRef.current.getValue());
+          AxiosUtil.send("POST", "/issuemoa/users/save", formData, "", (e) => {
+            if (e.data !== "") {
+              window.location.replace("/SignUpComplete");
+            } else {
+              alert("Please try again later.");
+            }
+          });
+        }
       });
     }
   };
+
   return (
     <Form id="frm" className="container" noValidate validated={validated} onSubmit={handleSubmit} style={{width:"330px", height:"1000px"}}>
       <div className="text-center">
@@ -85,8 +93,9 @@ function SignUp() {
           </FloatingLabel>
         </Col>
       </Row>
-
+      
       <hr></hr>
+
       <Row className="mt-3">
         <Col md>
           <FloatingLabel label="Email address (Use ID.)">
@@ -113,7 +122,7 @@ function SignUp() {
       </FloatingLabel>
       
       <InputGroup className="mt-3">
-        <Form.Control placeholder="Search for the address." name="addrPostNo" ref={addrPostNo} readOnly />
+        <Form.Control placeholder="Search for the address." name="addrPostNo" ref={addrPostNo} required />
         <Button className="btn-success" type="button" onClick={serachAddress}>Search Address</Button>
       </InputGroup>
 

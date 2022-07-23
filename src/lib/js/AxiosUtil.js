@@ -25,8 +25,6 @@ export function send(method, url, param, type, callback) {
             console.log(error);
         });
     } else if (method === "POST") {
-        alert("POST!");  
-        console.log(param)
         axios.post(url, param, { 
           headers: { "Content-Type": contentType }
         })

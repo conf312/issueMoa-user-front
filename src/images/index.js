@@ -6,3 +6,4 @@ export { default as personGreen } from './person_green.png';
 export { default as kakaoIcon } from './kakao_icon.png';
 export { default as naverIcon } from './naver_icon.png';
 export { default as googleIcon } from './google_icon.png';
+export { default as celebrate } from './celebrate.png';
