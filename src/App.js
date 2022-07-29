@@ -1,7 +1,8 @@
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { Header, Main, Footer, SignIn, SignUp, SignUpComplete } from './components';
+import { Header, Main, Footer, SignIn, SignUp, SignUpComplete, MyPage } from './components';
+import PrivateRoute from './components/route/PrivateRoute';
 
 function App() {
   return (
@@ -14,9 +15,9 @@ function App() {
           <Route exact path="/SignUp" element={ <SignUp/> }/>
           <Route exact path="/SignUpComplete" element={ <SignUpComplete/> }/>
           
-          {/* <Route exact path="/" element={ <PrivateRoute /> }>
-            <Route exact path='/mypage' element={ <Mypage/> } />
-          </Route> */}
+          <Route exact path="/" element={ <PrivateRoute/> }>
+            <Route exact path='/MyPage' element={ <MyPage/> }/>
+          </Route>
           {/* paramter props <Route exact path="/info" render={() => <Info userInfo={userInfo} />} /> */}
         </Routes>
         <Footer/>
@@ -24,22 +25,4 @@ function App() {
     </div>
   );
 }
-
-// <div className="App">
-//   <header className="App-header">
-//     <img src={logo} className="App-logo" alt="logo" />
-//     <p>
-//       Edit <code>src/App.js</code> and save to reload.
-//     </p>
-//     <a
-//       className="App-link"
-//       href="https://reactjs.org"
-//       target="_blank"
-//       rel="noopener noreferrer"
-//     >
-//       Learn React
-//     </a>
-//   </header>
-// </div>
-
 export default App;

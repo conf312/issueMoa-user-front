@@ -40,8 +40,16 @@ function SignUp() {
   //   addr: fullAddress
   // });
 
-  // recaptchaRef, form validated
-  const recaptchaRef = React.createRef();
+  // password ref
+  const password = useRef(null);
+  const passwordConfirm = useRef(null);
+
+  // recaptcha, validate
+  const [recaptchaValue, setRecaptchaValue] = useState(false);
+  function onChangeRecaptcha(value) {
+    setRecaptchaValue(value);
+  }
+
   const [validated, setValidated] = useState(false);
   const handleSubmit = (event) => {
     event.stopPropagation();
@@ -56,9 +64,22 @@ function SignUp() {
         if (e.data > 0) {
           alert("Email in use. Please use another email.");
         } else {
-          formData.append("recaptchaValue", recaptchaRef.current.getValue());
+          
+          if (password.current.value !== passwordConfirm.current.value) {
+            alert("Passwords do not match.");
+            password.current.value = "";
+            passwordConfirm.current.value = "";
+            return false;
+          }
+
+          if (!recaptchaValue) {
+            alert("Please check recaptcha.");
+            return false;
+          }
+          
+          formData.append("recaptchaValue", recaptchaValue);
           AxiosUtil.send("POST", "/issuemoa/users/save", formData, "", (e) => {
-            if (e.data !== "") {
+            if (e.data > 0) {
               window.location.replace("/SignUpComplete");
             } else {
               alert("Please try again later.");
@@ -78,7 +99,7 @@ function SignUp() {
       <Row className="mt-3 g-2">
         <Col md>
           <FloatingLabel label="Last name">
-            <Form.Control placeholder="Last name" name="lastName" maxLength={5} required />
+            <Form.Control placeholder="Last name" name="lastName" maxLength={10} required />
             <Form.Control.Feedback type="invalid">
               Please provide a valid Last name.
             </Form.Control.Feedback>
@@ -86,9 +107,9 @@ function SignUp() {
         </Col>
         <Col md>
           <FloatingLabel label="First name">
-            <Form.Control placeholder="First name" name="firstName" maxLength={25} required />
+            <Form.Control placeholder="First name" name="firstName" minLength={3} maxLength={25} required />
             <Form.Control.Feedback type="invalid">
-              Please provide a valid First name.
+              Please provide a valid First name. (Lenth 3~25)
             </Form.Control.Feedback>
           </FloatingLabel>
         </Col>
@@ -101,39 +122,39 @@ function SignUp() {
           <FloatingLabel label="Email address (Use ID.)">
             <Form.Control type="email" placeholder="name@example.com" name="email" minLength={8} maxLength={100} required />
             <Form.Control.Feedback type="invalid">
-              Please provide a valid email. (Size 8~50)
+              Please provide a valid email. (Lenth 8~100)
             </Form.Control.Feedback>
           </FloatingLabel>
         </Col>
       </Row>
       
       <FloatingLabel className="mt-3" label="Password">
-        <Form.Control type="password" placeholder="Password" name="password" maxLength={100} required />
+        <Form.Control type="password" placeholder="Password" name="password" ref={password} minLength={8} maxLength={100} required />
         <Form.Control.Feedback type="invalid">
-          Please provide a valid password.
+          Please provide a valid password. (Lenth 8~100)
         </Form.Control.Feedback>
       </FloatingLabel>
       
       <FloatingLabel className="mt-3" label="Password Confirm">
-        <Form.Control type="password" placeholder="Password Confirm" name="passwordConfirm" maxLength={100} required />
+        <Form.Control type="password" placeholder="Password Confirm" name="passwordConfirm" ref={passwordConfirm} minLength={8} maxLength={100} required />
         <Form.Control.Feedback type="invalid">
-          Please provide a valid password confirm.
+          Please provide a valid password confirm. (Lenth 8~50)
         </Form.Control.Feedback>
       </FloatingLabel>
       
       <InputGroup className="mt-3">
-        <Form.Control placeholder="Search for the address." name="addrPostNo" ref={addrPostNo} required />
+        <Form.Control placeholder="Search for the address." name="addrPostNo" ref={addrPostNo} readOnly required />
         <Button className="btn-success" type="button" onClick={serachAddress}>Search Address</Button>
       </InputGroup>
 
-      <Form.Control className="mt-2" placeholder="Detail address" name="addr" ref={addr} required />
+      <Form.Control className="mt-2" placeholder="Detail address" name="addr" ref={addr} minLength={10} maxLength={100} required />
       <Form.Control.Feedback type="invalid">
-        Please provide a valid Detail address.
+        Please provide a valid Detail address. (Lenth 10~100)
       </Form.Control.Feedback>
 
       <ReCAPTCHA
         className="mt-3"
-        ref={recaptchaRef}
+        onChange={onChangeRecaptcha}
         sitekey="6Ldd5hkUAAAAAGJxXLbCFgFzl6Eagrh9jyPf9iQS"
       />
 
