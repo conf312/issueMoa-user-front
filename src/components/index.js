@@ -7,3 +7,4 @@ export { default as SignIn } from './users/SignIn';
 export { default as SignUp } from './users/SignUp';
 export { default as MyPage } from './users/MyPage';
 export { default as SignUpComplete } from './users/SignUpComplete';
+export { default as MainContents } from './support/MainContents';

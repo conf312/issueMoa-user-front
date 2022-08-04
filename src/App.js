@@ -1,12 +1,13 @@
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import 'react-multi-carousel/lib/styles.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { Header, Main, Footer, SignIn, SignUp, SignUpComplete, MyPage } from './components';
 import PrivateRoute from './components/route/PrivateRoute';
 
 function App() {
   return (
-    <div className="h-auto">
+    <div>
       <BrowserRouter>
         <Header/>
         <Routes>

@@ -1,8 +1,23 @@
-import 'bootstrap/dist/css/bootstrap.min.css';
 import { Row, Col, Card } from 'react-bootstrap';
 import { heart, heartFill, chatBox } from '../../images';
+import React, { useEffect, useState } from 'react';
+import * as AxiosUtil from '../../lib/js/AxiosUtil';
 
 function News() {
+  useEffect(() => {
+    AxiosUtil.send("GET", "/issuemoa/support/news/list", new FormData(), "", (e) => {
+      console.log(e);
+      // const data = e.data;
+      // if (data !== undefined) {
+      //   const bookmarkList = data.bookmarkList.data.content;
+      //   if (bookmarkList !== undefined) {
+      //     console.log(bookmarkList)
+      //     setBookmarkList(bookmarkList);
+      //   }
+      // }
+    });
+  }, []);
+
   return (
     <Row xs={1} md={4} className="">
       {Array.from({ length: 5 }).map((_, idx) => (

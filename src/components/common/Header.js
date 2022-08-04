@@ -27,8 +27,8 @@ function getLogout() {
 const IsEligible = () => {
   return (
   <>
-    <Button variant="link" className="link-dark btnLogin float-end fw-bold" onClick={getLogout}>Logout</Button>
-    <Button variant="link" className="link-primary border border-primary btnLogin float-end fw-bold" onClick={getMyPage}>MyPage</Button>
+    <Button variant="link" className="link-light btn float-end fw-bold" onClick={getLogout}>Logout</Button>
+    <Button variant="link" className="link-light border border-primary btn float-end fw-bold" onClick={getMyPage}>MyPage</Button>
   </>
   );
 }
@@ -36,17 +36,17 @@ const IsEligible = () => {
 const NotEligible = () => {  
   return (
     <>
-      <Button variant="link" className="link-primary border border-primary btnLogin float-end fw-bold" onClick={getSignUpPage}>Sign Up</Button>
-      <Button variant="link" className="link-dark btnLogin float-end fw-bold" onClick={getSignInPage}>Sign In</Button>
+      <Button variant="link" className="link-light border border-primary btn float-end fw-bold" onClick={getSignUpPage}>Sign Up</Button>
+      <Button variant="link" className="link-light btn float-end fw-bold" onClick={getSignInPage}>Sign In</Button>
     </>
   );
 }
 
 function Header() {
-  let auth = new Cookies().get("authFlag") ? true : false;
+  let auth = new Cookies().get("accessToken") ? true : false;
   return (
     <header className="Issuemoa-header">
-      <div className="p-3">
+      <div>
         <img src={logo} className="logo" alt="logo" onClick={getMainPage}/>
         { auth && <IsEligible />}
         { !auth && <NotEligible />}

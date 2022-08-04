@@ -1,6 +1,7 @@
 import '../../App.css';
-import { Topic, News } from '../index';
-import { Tab, Tabs, Carousel } from 'react-bootstrap';
+import { Topic, News, MainContents } from '../index';
+import { Tab, Tabs, Carousel, Row, Form, Col } from 'react-bootstrap';
+import MockScroll from '../scroll/MockScroll.tsx';
 
 function Main() {
   return (
@@ -46,18 +47,40 @@ function Main() {
         </Carousel>
       </div>
       <div className="m-5">
-        <Tabs
-            defaultActiveKey="topic"
+        <h3 className="fw-bold">Hot Topic</h3>
+        <MainContents />
+
+        <h3 className="fw-bold">News</h3>
+        <MainContents />
+        
+        <img src="https://image.tving.com/upload/fe/highlight/2022/0729/20220729172440banner_image_url_u.jpg/dims/resize/F_webp,-1" width="100%" height="100px;"></img>
+
+        <h3 className="fw-bold mt-5">Stock</h3>
+        <MainContents />
+        
+        <Row className="mt-5">
+          <Form.Group as={Col} controlId="formGridEmail">
+            <h3 className="fw-bold">Notice</h3>
+            <h5 className="text-break">TextTextTextTextTextTextTextTextText</h5>
+          </Form.Group>
+          <Form.Group as={Col} controlId="formGridPassword">
+            <h3 className="fw-bold">FAQ</h3>
+            <h5 className="text-break">TextTextTextTextTextTextTextTextText</h5>
+          </Form.Group>
+        </Row>
+        <br />
+        {/* <Tabs
+            defaultActiveKey="Topic"
             id="uncontrolled-tab-example"
             className="h4 mt-5 fw-bold"
             >
-          <Tab eventKey="topic" title="Topic">
-            <Topic/>
+          <Tab eventKey="Topic" title="Topic">
+            <MainContents />
           </Tab>
           <Tab eventKey="news" title="News">
             <News/>
           </Tab>
-        </Tabs>
+        </Tabs> */}
       </div>
     </div>
   )

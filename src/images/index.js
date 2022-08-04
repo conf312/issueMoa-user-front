@@ -13,3 +13,7 @@ export { default as plusPurple } from './plus_purple.png';
 export { default as exit } from './exit.png';
 export { default as messageCloud } from './message_cloud.png';
 export { default as writing } from './writing.png';
+export { default as youtubeDark } from './youtube_dark.png';
+export { default as instargramDark } from './instargram_dark.png';
+export { default as twitterDark } from './twitter_dark.png';
+export { default as facebookDark } from './facebook_dark.png';

@@ -38,6 +38,8 @@ function SignIn() {
               });
 
               window.location.href = "/";
+          } else if (e.code === "IV_LGN") {
+            alert("No matching member information found.");
           }
       });
     }

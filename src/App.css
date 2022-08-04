@@ -38,21 +38,37 @@
 }
 
 .Issuemoa-header {
-  background-color: white;
+  background-color: rgb(0, 0, 0);
   /* height: 55px; */
 }
 
 .Issuemoa-header .logo {
-  height: 40px;
+  height: 75px;
+  width: 15%;
   margin: 0px 0px 0px 30px;
   cursor: pointer;
 }
 
-.Issuemoa-header .btnLogin {
-  margin: 0px 20px 0px 0px;
+.Issuemoa-header .btn {
+  margin: 15px 20px 0px 0px;
   font-size: 20px;
 }
 
 .Issuemoa-main {
-  background-color: #e9ecef;
+  color: white;
+  /* background-color: #000000; */
+}
+
+.react-multi-carousel-item {
+  max-width: 370px;
+  min-width: 80px;
+}
+
+.Issuemoa-footer {
+  border-top: 0.083rem solid rgb(33, 33, 33);
+  /* height: 55px; */
+}
+
+.Cursor-pointer {
+  cursor: pointer;
 }

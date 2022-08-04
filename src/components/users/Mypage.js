@@ -1,4 +1,4 @@
-import { Form, Button, Card, Row, Col }  from 'react-bootstrap';
+import { Form, Button, Card, Row, Col, Toast }  from 'react-bootstrap';
 import React, { useEffect, useState } from 'react';
 import * as AxiosUtil from '../../lib/js/AxiosUtil';
 import { personGreen, heartFill, plusGreen, writing, messageCloud, exit } from '../../images';
@@ -6,28 +6,15 @@ import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
 
 function MyPage() {
-  useEffect(() => {
-    AxiosUtil.send("POST", "/issuemoa/users/my-page/index", new FormData(), "", (e) => {
-      console.log(e);
-      const data = e.data;
-      if (data !== undefined) {
-        const userInfo = data.userInfo;
-        if (userInfo !== undefined) {
-          setUserName(userInfo.firstName + userInfo.lastName);
-          setUserEmail(userInfo.email);
-          setUserAddr(userInfo.addrPostNo + " " + userInfo.addr);
-        }
-      }
-    });
-  }, []);
-
+  const [bookmarkList, setBookmarkList] = useState([]);
+  const [userId, setUserId] = useState("");
   const [userName, setUserName] = useState("");
   const [userEmail, setUserEmail] = useState("");
   const [userAddr, setUserAddr] = useState("");
-
+  const [visit, setVisit] = useState("");
+  const [show, setShow] = useState(false);
   const responsive = {
     superLargeDesktop: {
-      // the naming can be any, depends on you.
       breakpoint: { max: 4000, min: 3000 },
       items: 4
     },
@@ -44,6 +31,46 @@ function MyPage() {
       items: 1
     }
   };
+
+  function getProfileModify(id) {
+    alert("getProfileModify : " + id);
+  }
+
+  function deleteBookmark(id) {
+    const formData = new FormData();
+    formData.append("id", id);
+    AxiosUtil.send("POST", "/issuemoa/support/bookmark/deleteById", formData, "", (e) => {
+      setShow(true);
+      setBookmarkList(current =>
+        current.filter(bookmarkList => {
+          return bookmarkList.id !== id;
+        }),
+      );
+    });
+  }
+
+  useEffect(() => {
+    AxiosUtil.send("POST", "/issuemoa/users/my-page/index", new FormData(), "", (e) => {
+      console.log(e);
+      const data = e.data;
+      if (data !== undefined) {
+        const userInfo = data.userInfo;
+        if (userInfo !== undefined) {
+          setUserId(userInfo.id);
+          setUserName(userInfo.firstName + userInfo.lastName);
+          setUserEmail(userInfo.email);
+          setUserAddr(userInfo.addrPostNo + " " + userInfo.addr);
+          setVisit(userInfo.visitCnt);
+        }
+
+        const bookmarkList = data.bookmarkList.data.content;
+        if (bookmarkList !== undefined) {
+          console.log(bookmarkList)
+          setBookmarkList(bookmarkList);
+        }
+      }
+    });
+  }, []);
 
   return (
     <Form id="frm" className="m-5" style={{ height:"850px" }}>
@@ -62,24 +89,24 @@ function MyPage() {
             <h5 className="fw-bold">Address</h5>
             <h6>{userAddr}</h6>
         </Row>
-        <Button className="mt-3 fw-bold" type="submit">Modify</Button>
+        <Button className="mt-3 fw-bold" onClick={()=>getProfileModify(userId)}>Modify</Button>
       </div>
       <div className="mt-5">
         <Row>
           <Col>
             <img src={exit} alt="exit" height={"30px"} className="float-start"/>
             <h3 className="fw-bold">Visit</h3>
-            <h5>332</h5>
+            <h4>{visit}</h4>
           </Col>
           <Col>
             <img src={writing} alt="exit" height={"30px"} className="float-start"/>
             <h3 className="fw-bold">Writing</h3>
-            <h5>0</h5>
+            <h4>0</h4>
           </Col>
           <Col>
             <img src={messageCloud} alt="exit" height={"30px"} className="float-start"/>
             <h3 className="fw-bold">Writing comments</h3>
-            <h5>12</h5>
+            <h4>12</h4>
           </Col>
         </Row>
       </div>
@@ -92,23 +119,29 @@ function MyPage() {
           <div className="text-slider-wrapper">
             <Carousel 
               arrows={true}
-              draggable={false}
               responsive={responsive}
             >
-              {Array.from({ length: 5 }).map((_, idx) => (
-                <Card className="m-1">
-                  <Card.Img style={{cursor: 'pointer'}} variant="top" src="https://s.pstatic.net/static/newsstand/2022/0720/article_img/new_main/9022/143236_001.jpg" />
+              {bookmarkList.map((data, idx) => (
+                <Card className="m-1" key={data.id} draggable={false}>
+                  <Card.Img style={{cursor: 'pointer'}} variant="top" draggable={false} src="https://s.pstatic.net/static/newsstand/2022/0720/article_img/new_main/9022/143236_001.jpg" />
                   <Card.Body>
-                    <Card.Title>Card Topic</Card.Title>
+                    <Card.Title>{data.title}</Card.Title>
                     {/* <Card.Text>
                       Some quick example text to build on the card title and make up the
                     </Card.Text> */}
-                    <img src={heartFill} alt="heartFill" height="30px;" style={{cursor: 'pointer'}}/>
-                    <span className="float-end text-secondary">2022. 07. 20</span>
+                    <img src={heartFill} alt="heartFill" onClick={() => deleteBookmark(data.id)} height="30px;" style={{cursor: 'pointer'}}/>
+                    <span className="float-end text-secondary">{data.registerTime}</span>
                   </Card.Body>
                 </Card>
               ))}
             </Carousel>
+            <Toast onClose={() => setShow(false)} show={show} delay={3000} autohide>
+              <Toast.Header>
+                <strong className="me-auto">Deleted successfully!</strong>
+                <small>just a moment ago</small>
+              </Toast.Header>
+              {/* <Toast.Body>Deleted successfully.</Toast.Body> */}
+            </Toast>
           </div>
         </Row>
       </div>
