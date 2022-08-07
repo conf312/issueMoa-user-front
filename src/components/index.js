@@ -1,10 +1,12 @@
 export { default as Header } from './common/Header';
 export { default as Footer } from './common/Footer';
 export { default as Main } from './common/Main';
-export { default as Topic } from './support/Topic';
+export { default as Stock } from './support/Stock';
 export { default as News } from './support/News';
+export { default as Youtube } from './support/Youtube';
 export { default as SignIn } from './users/SignIn';
 export { default as SignUp } from './users/SignUp';
 export { default as MyPage } from './users/MyPage';
 export { default as SignUpComplete } from './users/SignUpComplete';
-export { default as MainContents } from './support/MainContents';
+export { default as Notice } from './support/Notice';
+export { default as FAQ } from './support/FAQ';

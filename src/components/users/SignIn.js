@@ -50,16 +50,12 @@ function SignIn() {
       <div className="text-center">
         <img src={personGreen} alt="person" height={"200px"}/>
       </div>
-      <Row className="mt-4">
-        <Col md>
-          <FloatingLabel label="Email">
-            <Form.Control type="email" name="email" placeholder="name@example.com" maxLength={100} required />
-            <Form.Control.Feedback type="invalid">
-              Please provide a valid email.
-            </Form.Control.Feedback>
-          </FloatingLabel>
-        </Col>
-      </Row>
+      <FloatingLabel label="Email" className="mt-4">
+        <Form.Control type="email" style={{color:"gray"}} name="email" placeholder="name@example.com" maxLength={100} required />
+        <Form.Control.Feedback type="invalid">
+          Please provide a valid email.
+        </Form.Control.Feedback>
+      </FloatingLabel>
       <FloatingLabel className="mt-3" label="Password">
         <Form.Control type="password" name="password" placeholder="Password" maxLength={100} required />
         <Form.Control.Feedback type="invalid">

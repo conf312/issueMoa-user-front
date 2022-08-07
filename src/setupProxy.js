@@ -2,12 +2,20 @@ const { createProxyMiddleware } = require('http-proxy-middleware');
 
 module.exports = function (app) {
   app.use(
-    "/issuemoa",
-    createProxyMiddleware({
+    createProxyMiddleware("/issuemoa", {
       target: "http://localhost:8000",
       pathRewrite: {
-        '^/issuemoa': '',
+        '^/issuemoa': "",
       }
-    }),
+    })
+  );
+  app.use(
+    createProxyMiddleware("/googleapisYoutube", {
+      target: "https://www.googleapis.com/youtube/v3/videos",
+      changeOrigin: true,
+      pathRewrite: {
+        '^/googleapisYoutube': "",
+      }
+    })
   );
 };

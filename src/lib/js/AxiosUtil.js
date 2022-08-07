@@ -5,9 +5,13 @@ const cookies = new Cookies();
 axios.defaults.withCredentials = true;
 
 export function send(method, url, param, type, callback) {
-  axios.defaults.headers.common['X-CLIENT-KEY'] = "SamQHPleQjbSKeyRvJWElcHJvamVjdCFA";
-  axios.defaults.headers.common['Authorization'] = "Bearer " + cookies.get("accessToken");
-  const contentType = type === "json" ? "application/json" : "multipart/form-data";
+  if (url.indexOf("issuemoa") > -1) {
+    axios.defaults.headers.common['X-CLIENT-KEY'] = "SamQHPleQjbSKeyRvJWElcHJvamVjdCFA";
+    axios.defaults.headers.common['Authorization'] = "Bearer " + cookies.get("accessToken");
+  } else {
+    axios.defaults.headers.common['X-CLIENT-KEY'] = "";
+    axios.defaults.headers.common['Authorization'] = "";
+  }
   
   if (method === "GET") {
       axios.get(url, param)
@@ -26,7 +30,7 @@ export function send(method, url, param, type, callback) {
       });
   } else if (method === "POST") {
       axios.post(url, param, { 
-        headers: { "Content-Type": contentType }
+        headers: { "Content-Type": type === "json" ? "application/json" : "multipart/form-data" }
       })
       .then(function (response) {
           console.log("==> axios POST then");
@@ -62,7 +66,7 @@ export async function asyncSend(method, url, param, type, callback) {
           console.log(error);
       });
   } else if (method === "POST") {
-			await axios.post(url, param, { 
+      await axios.post(url, param, { 
         headers: { "Content-Type": contentType }
       })
       .then(function (response) {

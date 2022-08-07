@@ -51,7 +51,7 @@
 
 .Issuemoa-header .btn {
   margin: 15px 20px 0px 0px;
-  font-size: 20px;
+  font-size: 18px;
 }
 
 .Issuemoa-main {
@@ -60,8 +60,8 @@
 }
 
 .react-multi-carousel-item {
-  max-width: 370px;
-  min-width: 80px;
+  padding: 5px;
+  max-width: 115px;
 }
 
 .Issuemoa-footer {
@@ -71,4 +71,8 @@
 
 .Cursor-pointer {
   cursor: pointer;
+}
+
+.item-youtube {
+  max-width: 100%;
 }

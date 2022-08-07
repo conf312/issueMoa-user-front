@@ -1,7 +1,7 @@
 import '../../App.css';
-import { Topic, News, MainContents } from '../index';
-import { Tab, Tabs, Carousel, Row, Form, Col } from 'react-bootstrap';
-import MockScroll from '../scroll/MockScroll.tsx';
+import { News, Youtube, Stock, Notice, FAQ } from '../index';
+import { Carousel, Row, Form, Col } from 'react-bootstrap';
+import { main01, main02, main03 } from '../../images';
 
 function Main() {
   return (
@@ -11,76 +11,56 @@ function Main() {
           <Carousel.Item>
             <img
               className="d-block w-100"
-              src="https://1.bp.blogspot.com/-ACs0W9CKqgk/XP29557DNRI/AAAAAAAAB3s/oDuo8NPJVjAVyPWrLC5D0fF3FUPpTx82QCLcBGAs/s1600/44.gif"
-              alt="First slide"
-              height={"700px;"}
+              src={main01}
+              alt="main01 slide"
+              height={"450px;"}
             />
             <Carousel.Caption>
-              <h3>First slide label</h3>
+              <h3>Watcher's Eye</h3>
               <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
             </Carousel.Caption>
           </Carousel.Item>
           <Carousel.Item>
             <img
               className="d-block w-100"
-              src="https://1.bp.blogspot.com/-h_b7Xv7HAsk/XP298EENDEI/AAAAAAAAB4A/jYLTzHkmfyo4ztMzXrz-mwHOuvCCWFj_QCLcBGAs/s1600/99.gif"
-              alt="Second slide"
-              height={"700px;"}
+              src={main02}
+              alt="main02 slide"
+              height={"450px;"}
             />
             <Carousel.Caption>
-              <h3>Second slide label</h3>
+              <h3>Forbidden Flame</h3>
               <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
             </Carousel.Caption>
           </Carousel.Item>
           <Carousel.Item>
             <img
               className="d-block w-100"
-              src="https://1.bp.blogspot.com/-X8UxmMg0Ueg/XP297HtYR2I/AAAAAAAAB34/FMyx1f4cg3sk5U4aaIERMLsCzX6Da7OagCLcBGAs/s1600/77.gif"
-              alt="Second slide"
-              height={"700px;"}
+              src={main03}
+              alt="main03 slide"
+              height={"450px;"}
             />
             <Carousel.Caption>
-              <h3>Three slide label</h3>
+              <h3>Dying Sun</h3>
               <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
             </Carousel.Caption>
           </Carousel.Item>
         </Carousel>
       </div>
-      <div className="m-5">
-        <h3 className="fw-bold">Hot Topic</h3>
-        <MainContents />
-
-        <h3 className="fw-bold">News</h3>
-        <MainContents />
+      <div className="m-3">
+        <News />
+        <Youtube />
+        <img src="https://image.tving.com/upload/fe/highlight/2022/0729/20220729172440banner_image_url_u.jpg/dims/resize/F_webp,-1" className="mt-3" width="100%" height="100px;"></img>
         
-        <img src="https://image.tving.com/upload/fe/highlight/2022/0729/20220729172440banner_image_url_u.jpg/dims/resize/F_webp,-1" width="100%" height="100px;"></img>
+        <Stock />
 
-        <h3 className="fw-bold mt-5">Stock</h3>
-        <MainContents />
-        
         <Row className="mt-5">
           <Form.Group as={Col} controlId="formGridEmail">
-            <h3 className="fw-bold">Notice</h3>
-            <h5 className="text-break">TextTextTextTextTextTextTextTextText</h5>
+            <Notice />
           </Form.Group>
           <Form.Group as={Col} controlId="formGridPassword">
-            <h3 className="fw-bold">FAQ</h3>
-            <h5 className="text-break">TextTextTextTextTextTextTextTextText</h5>
+            <FAQ />
           </Form.Group>
         </Row>
-        <br />
-        {/* <Tabs
-            defaultActiveKey="Topic"
-            id="uncontrolled-tab-example"
-            className="h4 mt-5 fw-bold"
-            >
-          <Tab eventKey="Topic" title="Topic">
-            <MainContents />
-          </Tab>
-          <Tab eventKey="news" title="News">
-            <News/>
-          </Tab>
-        </Tabs> */}
       </div>
     </div>
   )
