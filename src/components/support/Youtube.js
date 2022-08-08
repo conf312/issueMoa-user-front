@@ -7,8 +7,9 @@ function Youtube() {
   const [youtubeList, setYoutubeList] = useState([]);
 
   useEffect(() => {
-    AxiosUtil.send("GET", "/googleapisYoutube?part=id&chart=mostPopular&maxResults=9&regionCode=kr&key=AIzaSyCVQlZqYM1NpZbnLh00UCpPl7GM4CgXknE"
-      , "", "json", (e) => {
+    const YOUTUBE_KEY = process.env.REACT_APP_YOUTUBE_KEY;
+    AxiosUtil.send("GET", "/googleapisYoutube?part=id&chart=mostPopular&maxResults=9&regionCode=kr&key=" + YOUTUBE_KEY
+      , "", "", (e) => {
       setYoutubeList(e.items);
     });
   }, []);

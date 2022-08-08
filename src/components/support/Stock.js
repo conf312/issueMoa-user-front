@@ -1,53 +1,112 @@
-import React, { useEffect, useState, useRef } from 'react';
-import { Row, Col, Card } from 'react-bootstrap';
+import React, { useEffect, useState } from 'react';
+import { Tab, Tabs, Row, Col } from 'react-bootstrap';
 import * as AxiosUtil from '../../lib/js/AxiosUtil';
-import { heart, heartFill, chatBox } from '../../images';
 
-function Topic() {
-  const [topicList, setTopicList] = useState([]);
+function Stock() {
+  const [kospiList, setKospiList] = useState([]);
+  const [kosdaqList, setKosdaqList] = useState([]);
 
   useEffect(() => {
-    AxiosUtil.send("GET", "/issuemoa/support/news/list", new FormData(), "", (e) => {
-      console.log(e);
-      const data = e.data;
-      if (data !== undefined) {
-        setTopicList(data.list);
-      }
+    const STOCK_KEY = process.env.REACT_APP_STOCK_KEY;
+    AxiosUtil.send("GET", "/krxStock?serviceKey=" + STOCK_KEY + "&numOfRows=10&resultType=json&mrktCls=KOSPI&beginMrktTotAmt=35000000000000"
+      , "", "", (e) => {
+      setKospiList(e.response.body.items.item);
+    });
+    AxiosUtil.send("GET", "/krxStock?serviceKey=" + STOCK_KEY + "&numOfRows=10&resultType=json&mrktCls=KOSDAQ&beginMrktTotAmt=2500000000000"
+      , "", "", (e) => {
+      setKosdaqList(e.response.body.items.item);
     });
   }, []);
 
-  function removeTag(str) {
-    return str.replace(/(<([^>]+)>)/ig, "");
+  function stockFormat(type, vs, data) {
+    if (vs > 0) {
+      data = type === "vs" ? "▲ " + vs : type === "fltRt" ? "+" + data + "%" : data;
+      return <h5 className="text-break text-danger">{data}</h5>
+    } else if (vs < 0) {
+      data = type === "vs" ? "▼ " + vs : type === "fltRt" ? data + "%" : data;
+      return <h5 className="text-break text-primary">{data}</h5>
+    } else {
+      data = type === "vs" ? "-" : type === "fltRt" ? "0.00%" : data;
+      return <h5 className="text-break">{data}</h5>
+    }
   }
-  
+
   return (
     <>
       <h3 className="fw-bold mt-5">Stock</h3>
-      <Row xs={1} md={4} className="m-1">
-        {topicList.map((data, idx) => (
-          <Col className="mt-3">
-            <Card style={{ width: '27em', backgroundColor:"black" }}>
-              <Card.Img style={{cursor: 'pointer'}} variant="top" src="https://s.pstatic.net/static/newsstand/2022/0720/article_img/new_main/9193/141955_001.jpg" />
-              <Card.Body>
-                  <Card.Title>{data.title}</Card.Title>
-                  <Card.Text>
-                    {
-                      removeTag(data.contents).length < 50 ? 
-                      removeTag(data.contents) : removeTag(data.contents).slice(0, 50) + '...'
-                    }
-                  </Card.Text>
-                  <img src={heart} alt="heart" height="30px;"/>
-                  <text style={{color:"gray", marginLeft:5}}>23</text>
-                  <img src={chatBox} alt="chatbox" height="30px;" style={{marginLeft:20}}/>
-                  <text style={{color:"gray", marginLeft:5}}>17</text>
-                  <p className="text-end text-secondary">{data.registerTime.substring(0,10)}</p>
-              </Card.Body>
-            </Card>
-          </Col>
-        ))}
-      </Row>
+      <Tabs
+        defaultActiveKey="kospi"
+        className="m-2 mt-4 fw-bold"
+      >
+        <Tab eventKey="kospi" title="KOSPI">
+          <Row className="m-1 mt-4">
+            <Col>
+              <h5 className="text-break fw-bold">종목명</h5>
+            </Col>
+            <Col>
+              <h5 className="text-break fw-bold">가격</h5>
+            </Col>
+            <Col>
+              <h5 className="text-break fw-bold">전일비</h5>
+            </Col>
+            <Col>
+              <h5 className="text-break fw-bold">등락률</h5>
+            </Col>
+          </Row>
+          <hr></hr>
+          {kospiList.map((data, idx) => (
+            <Row className="m-2">
+              <Col>
+                <h5 className="text-break">{data.itmsNm}</h5>
+              </Col>
+              <Col>
+                { stockFormat("", data.vs, data.clpr) }
+              </Col>
+              <Col>
+                { stockFormat("vs", data.vs , "") }
+              </Col>
+              <Col>
+                { stockFormat("fltRt", data.vs, data.fltRt) }
+              </Col>
+            </Row>
+          ))}
+        </Tab>
+        <Tab eventKey="kosdaq" title="KOSDAQ">
+          <Row className="m-1 mt-4">
+            <Col>
+              <h5 className="text-break fw-bold">종목명</h5>
+            </Col>
+            <Col>
+              <h5 className="text-break fw-bold">가격</h5>
+            </Col>
+            <Col>
+              <h5 className="text-break fw-bold">전일비</h5>
+            </Col>
+            <Col>
+              <h5 className="text-break fw-bold">등락률</h5>
+            </Col>
+          </Row>
+          <hr></hr>
+          {kosdaqList.map((data, idx) => (
+            <Row className="m-2">
+              <Col>
+                <h5 className="text-break">{data.itmsNm}</h5>
+              </Col>
+              <Col>
+                { stockFormat("", data.vs, data.clpr) }
+              </Col>
+              <Col>
+                { stockFormat("vs", data.vs , "") }
+              </Col>
+              <Col>
+                { stockFormat("fltRt", data.vs, data.fltRt) }
+              </Col>
+            </Row>
+          ))}
+        </Tab>
+      </Tabs>
     </>
   );
 }
 
-export default Topic;
+export default Stock;

@@ -49,11 +49,9 @@ function Main() {
       <div className="m-3">
         <News />
         <Youtube />
-        <img src="https://image.tving.com/upload/fe/highlight/2022/0729/20220729172440banner_image_url_u.jpg/dims/resize/F_webp,-1" className="mt-3" width="100%" height="100px;"></img>
-        
+        <img src="https://image.tving.com/upload/fe/highlight/2022/0729/20220729172440banner_image_url_u.jpg/dims/resize/F_webp,-1" className="mt-5" width="100%" height="150px;"></img>
         <Stock />
-
-        <Row className="mt-5">
+        <Row className="m-2 mt-5">
           <Form.Group as={Col} controlId="formGridEmail">
             <Notice />
           </Form.Group>

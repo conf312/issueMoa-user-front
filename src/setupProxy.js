@@ -18,4 +18,13 @@ module.exports = function (app) {
       }
     })
   );
+  app.use(
+    createProxyMiddleware("/krxStock", {
+      target: "http://apis.data.go.kr/1160100/service/GetStockSecuritiesInfoService/getStockPriceInfo",
+      changeOrigin: true,
+      pathRewrite: {
+        '^/krxStock': "",
+      }
+    })
+  );
 };
