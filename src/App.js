@@ -15,7 +15,6 @@ function App() {
           <Route exact path="/SignIn" element={ <SignIn/> }/>
           <Route exact path="/SignUp" element={ <SignUp/> }/>
           <Route exact path="/SignUpComplete" element={ <SignUpComplete/> }/>
-          
           <Route exact path="/" element={ <PrivateRoute/> }>
             <Route exact path='/MyPage' element={ <MyPage/> }/>
           </Route>

@@ -1,4 +1,4 @@
-import { Form, Button, FloatingLabel, Row, Col }  from 'react-bootstrap';
+import { Form, Button, FloatingLabel }  from 'react-bootstrap';
 import { personGreen, naverIcon, googleIcon, kakaoIcon } from '../../images';
 import { Cookies } from "react-cookie";
 import React, { useState } from 'react';
@@ -19,19 +19,9 @@ function SignIn() {
         console.log(e);
           if (e.code === "LGN") {
               const cookies = new Cookies();
-              /*
-              path (string): cookie path, use / as the path if you want your cookie to be accessible on all pages
-              expires (Date): absolute expiration date for the cookie
-              maxAge (number): relative max age of the cookie from when the client receives it in seconds
-              domain (string): domain for the cookie (sub.domain.com or .allsubdomains.com)
-              secure (boolean): Is only accessible through HTTPS?
-              httpOnly (boolean): Can only the server access the cookie? Note: You cannot get or set httpOnly cookies from the browser, only the server.
-              sameSite (boolean|none|lax|strict): Strict or Lax enforcement
-              */
               cookies.set("accessToken", e.accessToken, {
                   path: "/"
               });
-
               cookies.set("authFlag", true, {
                 path: "/",
                 maxAge: e.accessTokenExpires

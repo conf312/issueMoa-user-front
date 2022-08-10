@@ -18,15 +18,19 @@ function Stock() {
     });
   }, []);
 
+  function numberFormat(value) {
+    return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+  }
+
   function stockFormat(type, vs, data) {
     if (vs > 0) {
-      data = type === "vs" ? "▲ " + vs : type === "fltRt" ? "+" + data + "%" : data;
+      data = type === "vs" ? "▲ " + numberFormat(vs) : type === "fltRt" ? "+" + data + "%" : numberFormat(data);
       return <h5 className="text-break text-danger">{data}</h5>
     } else if (vs < 0) {
-      data = type === "vs" ? "▼ " + vs : type === "fltRt" ? data + "%" : data;
+      data = type === "vs" ? "▼ " + numberFormat(vs) : type === "fltRt" ? data + "%" : numberFormat(data);
       return <h5 className="text-break text-primary">{data}</h5>
     } else {
-      data = type === "vs" ? "-" : type === "fltRt" ? "0.00%" : data;
+      data = type === "vs" ? "-" : type === "fltRt" ? "0.00%" : numberFormat(data);
       return <h5 className="text-break">{data}</h5>
     }
   }

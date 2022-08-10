@@ -11,11 +11,10 @@ function PrivateRoute() {
     if (cookies.get("accessToken") !== undefined) {
       AxiosUtil.send("POST", "/issuemoa/users/reissue", new FormData(), "", (e) => {
         const data = e.data;
-
+        
         cookies.set("accessToken", data.accessToken, {
-            path: "/"
+          path: "/"
         });
-
         cookies.set("authFlag", true, {
           path: "/",
           maxAge: data.accessTokenExpires

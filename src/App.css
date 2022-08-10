@@ -76,3 +76,7 @@
 .item-youtube {
   max-width: 100%;
 }
+
+.react-multi-carousel-item-mypage {
+  max-width: 250px;
+}
