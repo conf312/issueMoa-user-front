@@ -10,6 +10,7 @@ function PrivateRoute() {
   if (!auth) {
     if (cookies.get("accessToken") !== undefined) {
       AxiosUtil.send("POST", "/issuemoa/users/reissue", new FormData(), "", (e) => {
+        console.log(e);
         const data = e.data;
         
         cookies.set("accessToken", data.accessToken, {
@@ -24,7 +25,7 @@ function PrivateRoute() {
         window.location.href = href.substring(href.lastIndexOf("/"));
       });
     } else {
-      return <Navigate to="/SignIn" />;
+      return <Navigate to="/sign-in" />;
     }
   } else {
     return <Outlet />;

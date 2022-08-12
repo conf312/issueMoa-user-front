@@ -47,9 +47,9 @@ function Main() {
         </Carousel>
       </div>
       <div className="m-3">
-        <News />
+        <News type="slider"/>
         <Youtube />
-        <img src="https://image.tving.com/upload/fe/highlight/2022/0729/20220729172440banner_image_url_u.jpg/dims/resize/F_webp,-1" className="mt-5" width="100%" height="150px;"></img>
+        <img src="https://image.tving.com/upload/fe/highlight/2022/0729/20220729172440banner_image_url_u.jpg/dims/resize/F_webp,-1" alt="tving_banner" className="mt-5" width="100%" height="150px;"></img>
         <Stock />
         <Row className="m-2 mt-5">
           <Form.Group as={Col} controlId="formGridEmail">

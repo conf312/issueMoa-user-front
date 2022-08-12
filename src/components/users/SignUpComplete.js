@@ -2,7 +2,7 @@ import { Button } from 'react-bootstrap';
 import { celebrate } from '../../images';
 
 function getSignInPage() {
-  window.location.href = "/SignIn";
+  window.location.href = "/sign-in";
 }
 
 function SignUpComplete() {

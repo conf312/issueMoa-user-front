@@ -38,7 +38,7 @@ function MyPage() {
   };
 
   const btnEdit = {        
-    cursor: 'pointer', marginLeft:"5px", height:"30px", width:"25%"  
+    cursor: 'pointer', marginLeft:"5px", height:"30px", width:"20%"  
   };
 
   function changePassword(pwd) {

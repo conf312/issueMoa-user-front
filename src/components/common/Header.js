@@ -8,15 +8,15 @@ function getMainPage() {
 }
 
 function getSignInPage() {
-  window.location.href = "/SignIn";
+  window.location.href = "/sign-in";
 }
 
 function getSignUpPage() {
-  window.location.href = "/SignUp";
+  window.location.href = "/sign-up";
 }
 
 function getMyPage() {
-  window.location.href = "/MyPage";
+  window.location.href = "/my-page";
 }
 
 function getLogout() {

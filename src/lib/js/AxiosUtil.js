@@ -55,12 +55,6 @@ export async function asyncSend(method, url, param, type, callback) {
       .then(function (response) {
         console.log("==> axios GET then");
         callback (response.data);
-
-        if (url.indexOf("/logout") > -1) {
-          axios.defaults.headers.common['Authorization'] = "";
-          cookies.remove("authFlag");
-          cookies.remove("accessToken");
-        }
       })
       .catch(function (error) {
         console.log("==> axios GET error");

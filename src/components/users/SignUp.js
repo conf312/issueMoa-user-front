@@ -80,7 +80,7 @@ function SignUp() {
           formData.append("recaptchaValue", recaptchaValue);
           AxiosUtil.send("POST", "/issuemoa/users/save", formData, "", (e) => {
             if (e.data > 0) {
-              window.location.replace("/SignUpComplete");
+              window.location.replace("/sign-up/complete");
             } else {
               alert("Please try again later.");
             }

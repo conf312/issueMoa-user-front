@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import * as AxiosUtil from '../../lib/js/AxiosUtil';
-import { heart, heartFill, chatBox } from '../../images';
 
 function Notice() {
   const [noticeList, setNoticeList] = useState([]);
