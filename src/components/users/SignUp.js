@@ -6,7 +6,8 @@ import ReCAPTCHA from 'react-google-recaptcha';
 import * as AxiosUtil from '../../lib/js/AxiosUtil';
 
 function SignUp() {
-  // Address popup
+  const password = useRef(null);
+  const passwordConfirm = useRef(null);
   const addrPostNo = useRef(null);
   const addr = useRef(null);
   const serachAddressOpen = useDaumPostcodePopup("https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js");
@@ -28,23 +29,7 @@ function SignUp() {
   const serachAddress = () => {
     serachAddressOpen({ onComplete: serachAddressComplete });
   };
-  // const [inputs, setInputs] = useState({
-  //   addrPostNo: "",
-  //   addr: ""
-  // });
-  // const { 
-  //   addrPostNo,
-  //   addr } = inputs;
-  // setInputs({
-  //   addrPostNo: data.zonecode,
-  //   addr: fullAddress
-  // });
 
-  // password ref
-  const password = useRef(null);
-  const passwordConfirm = useRef(null);
-
-  // recaptcha, validate
   const [recaptchaValue, setRecaptchaValue] = useState(false);
   function onChangeRecaptcha(value) {
     setRecaptchaValue(value);
@@ -64,7 +49,6 @@ function SignUp() {
         if (e.data > 0) {
           alert("Email in use. Please use another email.");
         } else {
-          
           if (password.current.value !== passwordConfirm.current.value) {
             alert("Passwords do not match.");
             password.current.value = "";
@@ -95,7 +79,6 @@ function SignUp() {
       <div className="text-center">
         <img src={person} alt="person" height={"200px"}/>
       </div>
-      
       <Row className="mt-3 g-2">
         <Col md>
           <FloatingLabel label="Last name">
@@ -114,9 +97,7 @@ function SignUp() {
           </FloatingLabel>
         </Col>
       </Row>
-      
       <hr></hr>
-
       <Row className="mt-3">
         <Col md>
           <FloatingLabel label="Email address (Use ID.)">
@@ -127,37 +108,31 @@ function SignUp() {
           </FloatingLabel>
         </Col>
       </Row>
-      
       <FloatingLabel className="mt-3" label="Password">
         <Form.Control type="password" placeholder="Password" name="password" ref={password} minLength={8} maxLength={100} required />
         <Form.Control.Feedback type="invalid">
           Please provide a valid password. (Lenth 8~100)
         </Form.Control.Feedback>
       </FloatingLabel>
-      
       <FloatingLabel className="mt-3" label="Password Confirm">
         <Form.Control type="password" placeholder="Password Confirm" name="passwordConfirm" ref={passwordConfirm} minLength={8} maxLength={100} required />
         <Form.Control.Feedback type="invalid">
           Please provide a valid password confirm. (Lenth 8~50)
         </Form.Control.Feedback>
       </FloatingLabel>
-      
       <InputGroup className="mt-3">
         <Form.Control placeholder="Search for the address." name="addrPostNo" ref={addrPostNo} readOnly required />
         <Button className="btn-success" type="button" onClick={serachAddress}>Search Address</Button>
       </InputGroup>
-
       <Form.Control className="mt-2" placeholder="Detail address" name="addr" ref={addr} minLength={10} maxLength={100} required />
       <Form.Control.Feedback type="invalid">
         Please provide a valid Detail address. (Lenth 10~100)
       </Form.Control.Feedback>
-
       <ReCAPTCHA
         className="mt-3"
         onChange={onChangeRecaptcha}
-        sitekey="6Ldd5hkUAAAAAGJxXLbCFgFzl6Eagrh9jyPf9iQS"
+        sitekey={process.env.REACT_APP_RECAPTCHA_KEY}
       />
-
       <Button className="mt-3" type="submit" style={{width:"100%", height:"50px"}}>Submit</Button>
     </Form>
   );

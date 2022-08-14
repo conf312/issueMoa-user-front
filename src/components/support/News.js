@@ -1,9 +1,8 @@
 import React, { useEffect, useState, useCallback } from 'react';
-import { Card, Row, Col } from 'react-bootstrap';
+import { Card, Row, Col, Badge } from 'react-bootstrap';
 import { useInView } from "react-intersection-observer"
 import Carousel from 'react-multi-carousel';
 import * as AxiosUtil from '../../lib/js/AxiosUtil';
-import { plusGreen } from '../../images';
 
 function News(props) {
   
@@ -43,7 +42,7 @@ function News(props) {
     }, []);
     return (
       <>
-        <h3 className="fw-bold mt-5">News <img className="Cursor-pointer" src={plusGreen} alt="plus" width="35px" onClick={() => getNewsList()}/></h3>
+        <h3 className="fw-bold mt-5">News <Badge className="primary Cursor-pointer" pill  onClick={() => getNewsList()}>+</Badge></h3>
         <div className="mt-3">
             <div className="text-slider-wrapper">
               <Carousel 

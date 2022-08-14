@@ -47,7 +47,7 @@ function Header() {
   return (
     <header className="Issuemoa-header">
       <div>
-        <img src={logo} className="logo" alt="logo" onClick={getMainPage}/>
+        <img className="logo" alt="logo" src={logo} onClick={getMainPage}/>
         { auth && <IsEligible />}
         { !auth && <NotEligible />}
       </div>

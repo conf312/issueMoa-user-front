@@ -1,7 +1,7 @@
-import { Form, Card, Row, Col, Toast }  from 'react-bootstrap';
 import React, { useEffect, useState } from 'react';
+import { Form, Card, Row, Col, Toast }  from 'react-bootstrap';
 import * as AxiosUtil from '../../lib/js/AxiosUtil';
-import { personGreen, heartFill, plusGreen, editFull } from '../../images';
+import { personGreen, heartFill, editFull } from '../../images';
 import Carousel from 'react-multi-carousel';
 import ChangePassword from '../modal/ChangePassword';
 import ChangeName from '../modal/ChangeName';
@@ -38,7 +38,7 @@ function MyPage() {
   };
 
   const btnEdit = {        
-    cursor: 'pointer', marginLeft:"5px", height:"30px", width:"20%"  
+    cursor: "pointer", marginLeft:"5px", height:"30px", width:"20%"  
   };
 
   function changePassword(pwd) {
@@ -154,10 +154,6 @@ function MyPage() {
             <h4>{visit}</h4>
           </Col>
           <Col>
-            <h3 className="fw-bold">Writing</h3>
-            <h4>0</h4>
-          </Col>
-          <Col>
             <h3 className="fw-bold">Writing comments</h3>
             <h4>12</h4>
           </Col>
@@ -167,7 +163,6 @@ function MyPage() {
         <Row>
           <div>
             <h3 className="fw-bold float-start">Bookmark</h3>
-            <img src={plusGreen} alt="heartFill" height="35px;" style={{cursor: 'pointer', marginLeft:"5px"}}/>
           </div>
           <div className="text-slider-wrapper m-1">
             <Carousel 
@@ -176,7 +171,7 @@ function MyPage() {
               itemClass="react-multi-carousel-item-mypage"
             >
             {bookmarkList.map((data, idx) => (
-              <Card className="mt-1" key={data.id} style={{ backgroundColor:"black"}}>
+              <Card className="mt-1" key={idx} style={{ backgroundColor:"black"}}>
                 <Card.Img style={{cursor: 'pointer'}} draggable={false} src="https://s.pstatic.net/static/newsstand/2022/0720/article_img/new_main/9022/143236_001.jpg" />
                 <div className="m-2">
                   <img src={heartFill} alt="heartFill" onClick={() => deleteBookmark(data.id)} height="30px;" width="30px;" style={{cursor: 'pointer', float:"left"}}/>

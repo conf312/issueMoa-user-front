@@ -39,14 +39,14 @@
 
 .Issuemoa-header {
   background-color: rgb(0, 0, 0);
-  /* height: 55px; */
+  height: 75px;
 }
 
 .Issuemoa-header .logo {
+  max-width: 35%;
   height: 75px;
-  width: 15%;
-  margin: 0px 0px 0px 30px;
   cursor: pointer;
+  float: left;
 }
 
 .Issuemoa-header .btn {
