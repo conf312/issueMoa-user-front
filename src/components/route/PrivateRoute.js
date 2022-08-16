@@ -10,16 +10,18 @@ function PrivateRoute() {
   if (!auth) {
     if (cookies.get("accessToken") !== undefined) {
       AxiosUtil.send("POST", "/issuemoa/users/reissue", new FormData(), "", (e) => {
-        console.log(e);
+
         const data = e.data;
-        
-        cookies.set("accessToken", data.accessToken, {
-          path: "/"
-        });
-        cookies.set("authFlag", true, {
-          path: "/",
-          maxAge: data.accessTokenExpires
-        });
+
+        if (data !== undefined) {
+          cookies.set("accessToken", data.accessToken, {
+            path: "/"
+          });
+          cookies.set("authFlag", true, {
+            path: "/",
+            maxAge: data.accessTokenExpires
+          });
+        }
         
         let href = window.location.href;
         window.location.href = href.substring(href.lastIndexOf("/"));

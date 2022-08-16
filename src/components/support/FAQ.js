@@ -6,7 +6,6 @@ function FAQ() {
 
   useEffect(() => {
     AxiosUtil.send("GET", "/issuemoa/support/FAQ/list?pageSize=2", new FormData(), "", (e) => {
-      console.log(e);
       const data = e.data;
       if (data !== undefined) {
         setFAQList(data.list);

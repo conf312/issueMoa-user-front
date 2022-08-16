@@ -31,7 +31,7 @@ function SignUp() {
   };
 
   const [recaptchaValue, setRecaptchaValue] = useState(false);
-  function onChangeRecaptcha(value) {
+  const onChangeRecaptcha = (value) => {
     setRecaptchaValue(value);
   }
 
@@ -76,6 +76,7 @@ function SignUp() {
 
   return (
     <Form id="frm" className="container" noValidate validated={validated} onSubmit={handleSubmit} style={{width:"330px", height:"1000px"}}>
+      <input type="hidden" name="type" value="HOME"/>
       <div className="text-center">
         <img src={person} alt="person" height={"200px"}/>
       </div>

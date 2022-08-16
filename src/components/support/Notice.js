@@ -6,7 +6,6 @@ function Notice() {
 
   useEffect(() => {
     AxiosUtil.send("GET", "/issuemoa/support/notice/list?pageSize=4", new FormData(), "", (e) => {
-      console.log(e);
       const data = e.data;
       if (data !== undefined) {
         setNoticeList(data.list);

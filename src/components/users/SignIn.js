@@ -17,21 +17,20 @@ function SignIn() {
 
     if (form.checkValidity()) {
       AxiosUtil.send("POST", "/issuemoa/users/login", formData, "", (e) => {
-        console.log(e);
-          if (e.code === "LGN") {
-              const cookies = new Cookies();
-              cookies.set("accessToken", e.accessToken, {
-                  path: "/"
-              });
-              cookies.set("authFlag", true, {
-                path: "/",
-                maxAge: e.accessTokenExpires
-              });
+        if (e.code === "LGN") {
+            const cookies = new Cookies();
+            cookies.set("accessToken", e.accessToken, {
+                path: "/"
+            });
+            cookies.set("authFlag", true, {
+              path: "/",
+              maxAge: e.accessTokenExpires
+            });
 
-              window.location.href = "/";
-          } else if (e.code === "IV_LGN") {
-            alert("No matching member information found.");
-          }
+            window.location.href = "/";
+        } else if (e.code === "IV_LGN") {
+          alert("No matching member information found.");
+        }
       });
     }
   };
@@ -42,6 +41,7 @@ function SignIn() {
 
   return (
     <Form className="container mt-5" noValidate validated={validated} onSubmit={handleSubmit} style={{width:"350px", height:"850px"}}>
+      <input type="hidden" name="type" value="HOME"/>
       <div className="text-center">
         <img src={personGreen} alt="person" height={"200px"}/>
       </div>
