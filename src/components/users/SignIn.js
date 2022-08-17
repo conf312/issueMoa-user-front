@@ -1,5 +1,5 @@
 import { Form, Button, FloatingLabel }  from 'react-bootstrap';
-import { personGreen } from '../../images';
+import { personGreen, googleIcon, kakaoIcon } from '../../images';
 import { Cookies } from "react-cookie";
 import React, { useState, useEffect } from 'react';
 import * as AxiosUtil from '../../lib/js/AxiosUtil';
@@ -36,7 +36,7 @@ function SignIn() {
   };
 
   useEffect(() => {
-    SnsUtil.initializeNaverLogin();
+    SnsUtil.initializeSocialLogin();
   }, []);
 
   return (
@@ -59,7 +59,9 @@ function SignIn() {
       </FloatingLabel>
       <Button className="mt-3 fw-bold" type="submit" style={{width:"326px", height:"50px"}}>Login</Button>
       <div className="text-center mt-3">
-        <div id="naverIdLogin"></div>
+        <div id="naverIdLogin" className="m-3 Cursor-pointer " style={{float:"left"}}></div>
+        <img src={googleIcon} className="m-3 Cursor-pointer " alt="googleIcon" height={"70px"} />
+        <img src={kakaoIcon} className="m-3 Cursor-pointer" alt="googleIcon" height={"70px"} id="kakao-login-btn" />
       </div>
     </Form>
   );
