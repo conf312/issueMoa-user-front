@@ -4,6 +4,7 @@ import { Cookies } from "react-cookie";
 import React, { useState, useEffect } from 'react';
 import * as AxiosUtil from '../../lib/js/AxiosUtil';
 import * as SnsUtil from '../../lib/js/SnsUtil';
+import GoogleLogin from "react-google-login";
 
 function SignIn() {
   const [validated, setValidated] = useState(false);
@@ -35,6 +36,10 @@ function SignIn() {
     }
   };
 
+  const responseGoogle = (res) => {
+    console.log(res);
+  };
+
   useEffect(() => {
     SnsUtil.initializeSocialLogin();
   }, []);
@@ -59,9 +64,16 @@ function SignIn() {
       </FloatingLabel>
       <Button className="mt-3 fw-bold" type="submit" style={{width:"326px", height:"50px"}}>Login</Button>
       <div className="text-center mt-3">
-        <div id="naverIdLogin" className="m-3 Cursor-pointer " style={{float:"left"}}></div>
-        <img src={googleIcon} className="m-3 Cursor-pointer " alt="googleIcon" height={"70px"} />
-        <img src={kakaoIcon} className="m-3 Cursor-pointer" alt="googleIcon" height={"70px"} id="kakao-login-btn" />
+        <div id="naverIdLogin" className="m-3 Cursor-pointer" style={{float:"left"}}></div>
+        <GoogleLogin
+          clientId={process.env.REACT_APP_GOOGLE_OAUTH_CLIENT_ID}
+          onSuccess={responseGoogle}
+          onFailure={responseGoogle}
+          render={renderProps => (
+            <img src={googleIcon} className="m-3 Cursor-pointer" alt="googleIcon" height={"70px"} onClick={renderProps.onClick}/>
+          )}
+        />
+        <img src={kakaoIcon} className="m-3 Cursor-pointer" alt="kakaoIcon" height={"70px"} id="kakao-login-btn"/>
       </div>
     </Form>
   );

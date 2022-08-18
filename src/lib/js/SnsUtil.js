@@ -1,6 +1,8 @@
+import { gapi } from "gapi-script";
 const { naver, Kakao } = window;
 
 export function initializeSocialLogin() {
+  // Naver
   const naverLogin = new naver.LoginWithNaverId({
     clientId: process.env.REACT_APP_NAVER_CLIENT_ID,
     callbackUrl: "http://localhost:3000/sign-in", 
@@ -21,10 +23,21 @@ export function initializeSocialLogin() {
     }
   });   
 
+  // Google 
+  function start() {
+    gapi.client.init({
+      clientId: process.env.REACT_APP_GOOGLE_OAUTH_CLIENT_ID,
+      scope: 'email',
+    });
+  }
+
+  gapi.load('client:auth2', start);
+
   if (!Kakao.isInitialized()) {
     Kakao.init(process.env.REACT_APP_KAKAO_SCRIPT_KEY);
   }
 
+  // Kakao
   Kakao.Auth.createLoginButton({
     container: '#kakao-login-btn',
     success: function(authObj) {
