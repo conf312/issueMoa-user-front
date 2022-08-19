@@ -37,11 +37,13 @@ function SignIn() {
   };
 
   const responseGoogle = (res) => {
-    console.log(res);
+    res.profileObj.id = res.googleId;
+    SnsUtil.login(res.profileObj);
   };
 
   useEffect(() => {
     SnsUtil.initializeSocialLogin();
+    window.localStorage.clear();
   }, []);
 
   return (

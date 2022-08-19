@@ -14,8 +14,9 @@ function App() {
           <Route exact path="/" element={ <Main/> }/>
           <Route exact path="/sign-in" element={ <SignIn/> }/>
           <Route exact path="/sign-up" element={ <SignUp/> }/>
+          <Route exact path="/sign-up/:email/:name" element={ <SignUp/> }/>
           <Route exact path="/sign-up/complete" element={ <SignUpComplete/> }/>
-          <Route exact path="/news" element={ <News type="more" /> }/>
+          <Route exact path="/news" element={ <News type="more"/> }/>
           <Route exact path="/" element={ <PrivateRoute/> }>
             <Route exact path='/my-page' element={ <MyPage/> }/>
           </Route>

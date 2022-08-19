@@ -1,4 +1,5 @@
 import { gapi } from "gapi-script";
+import * as AxiosUtil from '../../lib/js/AxiosUtil';
 const { naver, Kakao } = window;
 
 export function initializeSocialLogin() {
@@ -13,11 +14,7 @@ export function initializeSocialLogin() {
 
   naverLogin.getLoginStatus(async function (status) {
     if (status) {
-      console.log("[NAVER] getLoginStatus success")
-      const userid = naverLogin.user.getEmail();
-      const username = naverLogin.user.getName();
-      console.log(userid)
-      console.log(username)
+      login(naverLogin.user);
     } else {
       console.log("[NAVER] getLoginStatus fail");
     }
@@ -44,7 +41,9 @@ export function initializeSocialLogin() {
       Kakao.API.request({
         url: '/v2/user/me',
         success: function(res) {
-          console.log(res)
+          res.kakao_account.id = res.id;
+          res.kakao_account.name = res.kakao_account.profile.nickname;
+          login(res.kakao_account);
         },
         fail: function(error) {
           console.log(
@@ -55,36 +54,20 @@ export function initializeSocialLogin() {
       })
     },
     fail: function(err) {
-      alert('failed to login: ' + JSON.stringify(err))
+      console.log('failed to login: ' + JSON.stringify(err));
     }
   })
 }
 
-export function bridge(type, method) {
-  
-  let url = "";
-  if ("naver" === type) {
-    
-  } else if ("kakao" === type) {
-    url = "";
-  } else if ("google" === type) {
-    url = "";
-  }
-
-  if ("login" === method) {
-    login(url);
-  } else if ("join" === method) {
-    join(url);
-  } else if ("share" === method) {
-    share(url);
-  }
-}
-
-function login(url) {
-}
-
-function join(url) {
-}
-
-function share(url) {
+export function login(user) {
+  console.log("==> [SNSUtil] login");
+  const formData = new FormData();
+  formData.append("socialId", user.id);
+  AxiosUtil.send("POST", "/issuemoa/users/find-by/social-id", formData, "", (e) => {
+    if (e.data) {
+      window.location.href = "/";
+    } else {
+      window.location.href = `/sign-up/${user.email}/${user.name}`;
+    }
+  });
 }

@@ -1,11 +1,22 @@
 import { Form, Button, InputGroup, FloatingLabel, Row, Col } from 'react-bootstrap';
 import { person } from '../../images';
 import { useDaumPostcodePopup } from 'react-daum-postcode';
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import ReCAPTCHA from 'react-google-recaptcha';
 import * as AxiosUtil from '../../lib/js/AxiosUtil';
+import { useParams } from "react-router-dom";
 
 function SignUp() {
+  const params = useParams();
+  useEffect(() => {
+    if (params.email != null && params.name != null) {
+      email.current.value = params.email;
+      firstName.current.value = params.name;
+    }
+  }, []);
+
+  const email = useRef(null);
+  const firstName = useRef(null);
   const password = useRef(null);
   const passwordConfirm = useRef(null);
   const addrPostNo = useRef(null);
@@ -91,7 +102,7 @@ function SignUp() {
         </Col>
         <Col md>
           <FloatingLabel label="First name">
-            <Form.Control placeholder="First name" name="firstName" minLength={3} maxLength={25} required />
+            <Form.Control placeholder="First name" name="firstName" ref={firstName} minLength={3} maxLength={25} required />
             <Form.Control.Feedback type="invalid">
               Please provide a valid First name. (Lenth 3~25)
             </Form.Control.Feedback>
@@ -102,7 +113,7 @@ function SignUp() {
       <Row className="mt-3">
         <Col md>
           <FloatingLabel label="Email address (Use ID.)">
-            <Form.Control type="email" placeholder="name@example.com" name="email" minLength={8} maxLength={100} required />
+            <Form.Control type="email" placeholder="name@example.com" name="email" ref={email} minLength={8} maxLength={100} required />
             <Form.Control.Feedback type="invalid">
               Please provide a valid email. (Lenth 8~100)
             </Form.Control.Feedback>

@@ -36,7 +36,7 @@ function PrivateRoute() {
   //let auth = cookies.get("accessToken") ? true : false; // determine if authorized, from context or however you're doing items
   // If authorized, return an outlet that will render child elements
   // If not, return element that will navigate to login page
-  //return auth ? <Outlet /> : <Navigate to="/SignIn" />;
+  //return auth ? <Outlet /> : <Navigate to="/sign-in" />;
 }
 
 export default PrivateRoute;
