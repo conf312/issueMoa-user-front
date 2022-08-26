@@ -1,5 +1,5 @@
 import { gapi } from "gapi-script";
-import * as AxiosUtil from '../../lib/js/AxiosUtil';
+import * as AxiosUtil from './AxiosUtil';
 const { naver, Kakao } = window;
 
 export function initializeSocialLogin() {
@@ -60,7 +60,6 @@ export function initializeSocialLogin() {
 }
 
 export function login(user) {
-  console.log("==> [SNSUtil] login");
   const formData = new FormData();
   formData.append("socialId", user.id);
   AxiosUtil.send("POST", "/issuemoa/users/find-by/social-id", formData, "", (e) => {
@@ -70,4 +69,4 @@ export function login(user) {
       window.location.href = `/sign-up/${user.email}/${user.name}`;
     }
   });
-}
+} 

@@ -3,7 +3,7 @@ import { personGreen, googleIcon, kakaoIcon } from '../../images';
 import { Cookies } from "react-cookie";
 import React, { useState, useEffect } from 'react';
 import * as AxiosUtil from '../../lib/js/AxiosUtil';
-import * as SnsUtil from '../../lib/js/SnsUtil';
+import * as SocialUtil from '../../lib/js/SocialUtil';
 import GoogleLogin from "react-google-login";
 
 function SignIn() {
@@ -38,11 +38,11 @@ function SignIn() {
 
   const responseGoogle = (res) => {
     res.profileObj.id = res.googleId;
-    SnsUtil.login(res.profileObj);
+    SocialUtil.login(res.profileObj);
   };
 
   useEffect(() => {
-    SnsUtil.initializeSocialLogin();
+    SocialUtil.initializeSocialLogin();
     window.localStorage.clear();
   }, []);
 
