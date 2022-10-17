@@ -2,8 +2,7 @@
 뉴스, 유튜브, 국내 증시를 한 눈에 보여주는 커뮤니티 사이트
 
 ## 사용 스택
-<img src="https://img.shields.io/badge/React-007396?style=flat-square&logo=React&logoColor=white"> <img src="https://img.shields.io/badge/Javascript-F7DF1E?style=flat-square&logo=javascript&logoColor=black"> <img src="https://img.shields.io/badge/Bootstrap-7952B3?style=flat-square&logo=Bootstrap&logoColor=white"> <img src="https://img.shields.io/badge/Github-181717?style=flat-square&logo=github&logoColor=white"> <img src="https://img.shields.io/badge/AWS-232F3E?style=flat-square&logo=Amazon AWS&logoColor=white">
-
+<img src="https://img.shields.io/badge/React-007396?style=flat-square&logo=React&logoColor=white"> <img src="https://img.shields.io/badge/Javascript-F7DF1E?style=flat-square&logo=javascript&logoColor=black"> <img src="https://img.shields.io/badge/Bootstrap-7952B3?style=flat-square&logo=Bootstrap&logoColor=white"> <img src="https://img.shields.io/badge/Github-181717?style=flat-square&logo=github&logoColor=white">
 ## 사용 API
 - 구글 유튜브
 - 공공 데이터 증시 시세 조회
