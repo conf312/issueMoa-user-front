@@ -10,7 +10,7 @@
 - 네이버 로그인
 - 카카오 로그인
 - 구글 로그인
-- Web API(뉴스, FAQ)
+- Web API (뉴스, FAQ)
 
 ## 화면 구성
 ![1](https://user-images.githubusercontent.com/13326651/196131291-e2ab1c31-7f82-4a83-8e18-8a54bf3edc0e.PNG)
